@@ -1,9 +1,7 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import Link from 'next/link';
 
 import Providers from '@/providers';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'GDI',
@@ -13,9 +11,24 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body style={{ padding: 0, margin: 0 }}>
         <Providers>
-          {children}
+          <div
+            style={{
+              gap: '24px',
+              display: 'flex',
+              padding: '8px 16px',
+              borderBottom: '1px solid silver',
+            }}
+          >
+            <Link href="/">Home Page</Link>
+            <Link href="/sign-in">Sign In</Link>
+            <Link href="/dashboard">Dashboard</Link>
+          </div>
+
+          <div style={{ padding: '24px' }}>
+            {children}
+          </div>
         </Providers>
       </body>
     </html>
