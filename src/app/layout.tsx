@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 import Providers from '@/providers';
+import Header from '@/layouts/Header';
 
 export const metadata: Metadata = {
   title: 'GDI',
@@ -13,18 +14,7 @@ const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
     <html lang="en">
       <body style={{ padding: 0, margin: 0 }}>
         <Providers>
-          <div
-            style={{
-              gap: '24px',
-              display: 'flex',
-              padding: '8px 16px',
-              borderBottom: '1px solid silver',
-            }}
-          >
-            <Link href="/">Home Page</Link>
-            <Link href="/sign-in">Sign In</Link>
-            <Link href="/dashboard">Dashboard</Link>
-          </div>
+          <Header />
 
           <div style={{ padding: '24px' }}>
             {children}

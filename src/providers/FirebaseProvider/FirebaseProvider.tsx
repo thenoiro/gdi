@@ -1,10 +1,11 @@
 'use client';
-import { ReactNode, createContext, useMemo } from 'react';
+import { ReactNode, createContext, useEffect, useMemo, useState } from 'react';
 import { initializeApp } from 'firebase/app';
 import {
   GoogleAuthProvider,
   User,
   getAuth,
+  onAuthStateChanged,
   signInWithPopup,
   signOut,
 } from 'firebase/auth';
@@ -74,11 +75,20 @@ export const FirebaseContext = createContext<AuthContext>(initialAuthContext);
 const FirebaseProvider = (props: FirebaseProviderProps) => {
   const { children } = props;
 
+  const [user, setUser] = useState(initialAuthContext.user);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (newUser) => {
+      setUser(newUser);
+    });
+  }, []);
+
   const authContext = useMemo(() => {
     return {
       ...initialAuthContext,
+      user,
     };
-  }, []);
+  }, [user]);
 
   return (
     <FirebaseContext.Provider value={authContext}>
