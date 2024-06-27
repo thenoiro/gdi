@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 
+import ThemeProvider from './ThemeProvider';
 import FirebaseProvider from './FirebaseProvider';
 
 interface ClientProvidersProps {
@@ -10,9 +11,11 @@ const ClientProviders = (props: ClientProvidersProps) => {
   const { children } = props;
 
   return (
-    <FirebaseProvider>
-      {children}
-    </FirebaseProvider>
+    <ThemeProvider>
+      <FirebaseProvider>
+        {children}
+      </FirebaseProvider>
+    </ThemeProvider>
   );
 };
 
