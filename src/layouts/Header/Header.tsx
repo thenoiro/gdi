@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import { Box, Button } from '@mui/material';
 
 import useAuth from '@/hooks/useAuth.hook';
 
@@ -7,41 +8,40 @@ const Header = () => {
   const { signOut, user } = useAuth();
 
   return (
-    <div
-      style={{
-        gap: '24px',
+    <Box
+      sx={(theme) => ({
+        gap: 3,
         display: 'flex',
-        padding: '8px 16px',
+        padding: theme.spacing(1, 3),
+        minHeight: theme.spacing(8),
         alignItems: 'center',
         justifyContent: 'space-between',
-        borderBottom: '1px solid silver',
-      }}
+        boxShadow: theme.shadows[9],
+        bgcolor: 'grey.50',
+      })}
     >
-      <div
-        style={{
-          gap: '24px',
-          display: 'flex',
-        }}
-      >
+      <Box display="flex" gap={3}>
         <Link href="/">Home Page</Link>
         <Link href="/sign-in">Sign In</Link>
         <Link href="/dashboard">Dashboard</Link>
-      </div>
+      </Box>
 
-      <div
-        style={{
-          gap: '24px',
-          display: 'flex',
-        }}
-      >
+      <Box display="flex" alignItems="center" gap={3}>
         {user && (
           <>
             <div>{user.displayName}</div>
-            <button onClick={signOut}>Log Out</button>
+
+            <Button variant="outlined" size="small" onClick={signOut}>
+              Log Out
+            </Button>
           </>
         )}
-      </div>
-    </div>
+
+        {!user && (
+          <div>Guest</div>
+        )}
+      </Box>
+    </Box>
   );
 };
 

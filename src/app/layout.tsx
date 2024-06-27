@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
+import { Box } from '@mui/material';
 
 import Providers from '@/providers';
 import Header from '@/layouts/Header';
@@ -12,13 +12,19 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   return (
     <html lang="en">
-      <body style={{ padding: 0, margin: 0 }}>
+      <body>
         <Providers>
-          <Header />
+          <Box
+            height="100dvh"
+            minHeight="100dvh"
+            overflow="hidden"
+          >
+            <Header />
 
-          <div style={{ padding: '24px' }}>
-            {children}
-          </div>
+            <Box height={1} p={3}>
+              {children}
+            </Box>
+          </Box>
         </Providers>
       </body>
     </html>
